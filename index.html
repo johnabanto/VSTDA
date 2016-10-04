@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Very Simple Todo App</title>
+	<!-- bower:css -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+	<!-- endbower -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="/app/styles/styles.css">
+	<!-- endinject -->
+	</head>
+
+<body ng-controller="mainController">
+	<div class="containter col-sm-10">
+<!-- 	Container for all elements
+ -->	<div class="panel panel-default">
+			<label class="col-sm-12 bg-info" id="title">Add priority Item</label>
+				<div class="panel-body">
+					<!-- Task input bar -->
+					<div class="form-group">
+						<label for="task">Task</label>
+							<input ng-model="task" class="form-control" placeholder="What do you need to do?" ></input>
+					</div> 
+					<!-- Priority drop down list -->
+					<div class="form-group">
+						<label for="priority">Priority</label>
+							<select  ng-model="priority" class="form-control" id="priorities">
+								<option value="" selected disabled style="display: none;" id="ddtext">How bad do you need to do this?</option>
+								<option value="1">A high priority item</option>
+								<option value="2">A medium priority item</option>
+								<option value="3">A low priority item</option>
+							</select>
+						</div>
+						</div>
+					<div class="panel-footer pull-sm-right">
+						<button ng-click="addNew()" type="button" class="btn btn-primary form-group">Add priority</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-sm-offest-8">
+		<!-- Priority organization buttons -->
+		<div class="panel-body">
+			<button ng-click="sort= '+priority';" class="btn btn-primary">Order by highest priority</button>
+			<button ng-click="sort= '-priority';" class="btn btn-primary">Order by lowest priority</button>
+			<button ng-click="sort= 'toDo';" class="btn btn-primary">Order alphabetically</button>
+		</div>
+		<!-- Create table for task -->
+		<div class="panel-body">
+			<table class="table table-bordered">
+				<tbody>
+					<tr ng-repeat="item in todos | orderBy: sort" ng-class="{'bg-danger': item.priority ==='1', 'bg-warning': item.priority ==='2', 'bg-success': item.priority ==='3'}">
+						<td>{{item.toDo}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- bower:js -->
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<!-- endbower -->
+
+	<!-- inject:js -->
+	<script src="/app/index.js"></script>
+	<!-- endinject -->
+</body>
+</html>
